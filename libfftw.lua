@@ -1,3 +1,5 @@
+-- Copyright 2019, Mansour Moufid <mansourmoufid@gmail.com>
+
 local libfftw = {}
 local fftwf = {}
 
