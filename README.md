@@ -1,6 +1,7 @@
 LibFFTW is a LuaJIT FFI wrapper for the FFTW library.
 
-LibFFTW supports single-precision, one-dimensional, real input DFTs.
+LibFFTW supports single- and double-precision, one-dimensional,
+real input DFTs.
 
 
 ## Requirements
@@ -11,8 +12,7 @@ LibFFTW requires [LuaJIT][] and the [FFTW][] library.
 ## Usage
 
     local ffi = require('ffi')
-    local libfftw = require('libfftw')
-    local fft = libfftw.fftwf
+    local fft = require('libfftw.fftwf')
 
     local x = ffi.new('float[3]', {1, 2, 3})
     local X = ffi.new('complex float[?]', 3)
