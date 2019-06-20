@@ -27,6 +27,7 @@ ffi.cdef([[
 ]])
 
 {{name}}.plans = {}
+{{name}}.threads = false
 
 function {{name}}.plan_dft(n, x, X)
     if {{name}}.plans[n] == nil then
@@ -59,6 +60,22 @@ function {{name}}.irfft(X, n, x)
     local d = 1 / n
     for i = 0, n - 1 do
         x[i] = x[i] * d
+    end
+end
+
+local suffixes = {'_omp', '_threads'}
+for _, suffix in pairs(suffixes) do
+    local ok, result = pcall(ffi.load, libname)
+    if ok then
+        local lib = result
+        {{name}}.threads = true
+        {{name}}.init_threads = function ()
+            lib.{{name}}_init_threads()
+        end
+        {{name}}.plan_with_nthreads = function (n)
+            lib.{{name}}_plan_with_nthreads(n)
+        end
+        break
     end
 end
 
