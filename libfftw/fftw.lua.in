@@ -48,9 +48,7 @@ function {{name}}.rfft(x, n, X)
     local plans = {{name}}.plan_dft(n, x, X)
     lib{{libname}}.{{name}}_execute_dft_r2c(plans[1], x, X)
     if n > 2 then
-        for i = mid(n), n - 1 do
-            X[i] = 0
-        end
+        ffi.fill(X + mid(n), ffi.sizeof(ffi.typeof(X), n - mid(n)), 0)
     end
 end
 

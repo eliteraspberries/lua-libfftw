@@ -48,9 +48,7 @@ function fftwf.rfft(x, n, X)
     local plans = fftwf.plan_dft(n, x, X)
     libfftw3f.fftwf_execute_dft_r2c(plans[1], x, X)
     if n > 2 then
-        for i = mid(n), n - 1 do
-            X[i] = 0
-        end
+        ffi.fill(X + mid(n), ffi.sizeof(ffi.typeof(X), n - mid(n)), 0)
     end
 end
 
