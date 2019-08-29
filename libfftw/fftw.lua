@@ -65,7 +65,7 @@ end
 
 local suffixes = {'_omp', '_threads'}
 for _, suffix in pairs(suffixes) do
-    local ok, result = pcall(ffi.load, libname)
+    local ok, result = pcall(ffi.load, 'fftw3' .. suffix)
     if ok then
         local lib = result
         fftw.threads = true
