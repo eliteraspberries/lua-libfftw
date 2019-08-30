@@ -24,6 +24,9 @@ ffi.cdef([[
     void fftwf_execute(const fftwf_plan);
     void fftwf_execute_dft_r2c(const fftwf_plan, float *, void *);
     void fftwf_execute_dft_c2r(const fftwf_plan, void *, float *);
+    int fftwf_init_threads(void);
+    void fftwf_plan_with_nthreads(int);
+    void fftwf_cleanup_threads(void);
 ]])
 
 fftwf.plans = {}
